@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stuart Shepard — C++ Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #0d0f12;
+      --surface:   #13161b;
+      --border:    #1e2329;
+      --accent:    #4af0a0;
+      --accent2:   #4ab8f0;
+      --text:      #c8d0dc;
+      --muted:     #5a6478;
+      --heading:   #eef1f5;
+      --mono:      'IBM Plex Mono', monospace;
+      --sans:      'IBM Plex Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 1.5rem;
+      overflow-x: hidden;
+    }
+
+    /* grid lines background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── header ── */
+    header {
+      padding: 5rem 0 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 0.7s ease forwards;
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .bio {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 560px;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ── section title ── */
+    .section-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 3.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── project cards ── */
+    .projects {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .card:nth-child(1) { animation: rise 0.6s ease 0.2s forwards; }
+    .card:nth-child(2) { animation: rise 0.6s ease 0.35s forwards; }
+    .card:nth-child(3) { animation: rise 0.6s ease 0.5s forwards; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: #2a3040;
+      background: #161921;
+    }
+
+    .card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .card-left { min-width: 0; }
+
+    .card-number {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .tag.hi {
+      border-color: #1e3a2a;
+      color: var(--accent);
+      background: #0d1f16;
+    }
+
+    .card-arrow {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      transition: color 0.2s, transform 0.2s;
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    .card:hover .card-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ── standards note ── */
+    .note {
+      margin: 3rem 0;
+      padding: 1.2rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent2);
+      border-radius: 4px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted);
+      opacity: 0;
+      animation: rise 0.6s ease 0.6s forwards;
+    }
+
+    .note strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── footer ── */
+    footer {
+      padding: 2.5rem 0 3rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: rise 0.6s ease 0.7s forwards;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 580px) {
+      .card { grid-template-columns: 1fr; }
+      .card-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <p class="label">C++ Learning Projects</p>
+      <h1>Stuart <span>Shepard</span></h1>
+      <p class="bio">
+        Software engineer transitioning from scientific computing into defense and aerospace software development.
+        Projects focus on object-oriented design, signal processing, CMake build systems, and static code analysis —
+        targeting roles in simulation and ground support software.
+      </p>
+    </header>
+
+    <p class="section-title">Projects</p>
+
+    <div class="projects">
+
+      <a class="card" href="./particles/html/index.html">
+        <div class="card-left">
+          <p class="card-number">01</p>
+          <p class="card-title">particle-simulator</p>
+          <p class="card-desc">
+            A class hierarchy representing particles in a physics simulation.
+            Demonstrates abstract base classes, virtual dispatch, polymorphism,
+            and CMake project structure.
+          </p>
+          <div class="tags">
+            <span class="tag hi">OOP</span>
+            <span class="tag hi">CMake</span>
+            <span class="tag">virtual functions</span>
+            <span class="tag">Cppcheck</span>
+            <span class="tag">std::array</span>
+          </div>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a class="card" href="./signals/html/index.html">
+        <div class="card-left">
+          <p class="card-number">02</p>
+          <p class="card-title">signal-analyzer</p>
+          <p class="card-desc">
+            A signal processing pipeline that generates synthetic noisy signals and applies
+            moving average or band-pass filtering via a naive DFT implementation.
+          </p>
+          <div class="tags">
+            <span class="tag hi">DFT</span>
+            <span class="tag hi">RF / Signal Processing</span>
+            <span class="tag">std::complex</span>
+            <span class="tag">exception handling</span>
+            <span class="tag">Doxygen</span>
+            <span class="tag">static library</span>
+          </div>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+
+    </div>
+
+    <div class="note">
+      <strong>Scope and standards:</strong> These projects are written in the context of simulation and ground support software,
+      where standard C++ features including exceptions, STL containers, and dynamic memory allocation are appropriate.
+      They do not follow safety-critical coding standards such as JSF++ or MISRA C++, which apply to flight-certified
+      and embedded systems and impose additional constraints including no exceptions, no dynamic allocation, and bounded loops.
+    </div>
+
+    <footer>
+      <a href="https://github.com/sshepar2/cpp-learning-projects">github.com/sshepar2/cpp-learning-projects</a>
+      &nbsp;·&nbsp; MIT License &nbsp;·&nbsp; 2026
+    </footer>
+
+  </div>
+</body>
+</html>
