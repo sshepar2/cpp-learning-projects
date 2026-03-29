@@ -1,0 +1,8 @@
+PROJECT_NAME           = "Signal Analyzer"
+INPUT                  = ./include ./src
+RECURSIVE              = YES
+OUTPUT_DIRECTORY       = ../docs/signals/
+EXTRACT_ALL            = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+QUIET                  = YES

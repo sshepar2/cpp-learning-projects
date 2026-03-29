@@ -11,11 +11,11 @@ private:
     float mass;
 public:
     Particle(float x, float y, float z, float particleMass);
-    virtual ~Particle() = default;
     std::array<float, 3> getPosition() const;
     float getMass() const;
     virtual float kineticEnergy();
     virtual void describe() = 0;
+    virtual ~Particle() = default;
 };
 
 class ClassicalParticle : public Particle {

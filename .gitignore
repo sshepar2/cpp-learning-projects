@@ -1,3 +1,6 @@
+# Documentation files
+docs/
+
 # Build and output directories
 build/
 bin/

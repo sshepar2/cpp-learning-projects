@@ -1,0 +1,36 @@
+name: Generate Docs
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Doxygen
+        run: sudo apt install doxygen -y
+
+      - name: Create docs directory
+        run: mkdir -p docs
+        
+      #- name: Run Doxygen for particles
+      #  run: |
+      #    cd particles
+      #    doxygen Doxyfile
+
+      - name: Run Doxygen for signals
+        run: |
+          cd signals
+          doxygen Doxyfile
+
+      - name: Copy landing page
+        run: cp index.html docs/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

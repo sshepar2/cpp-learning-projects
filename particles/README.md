@@ -1,6 +1,6 @@
 # Particles — C++ OOP Practice Project
 
-A small C++ project demonstrating object-oriented design, static code analysis, and CMake build system setup. Built as a practice exercise covering the core C++ concepts for system critical design. 
+A small C++ project demonstrating object-oriented design, static code analysis, and CMake build system setup. Built as a practice exercise covering the core C++ concepts for system critical design. Purposefully did not include error handling, assertions, or docstring in order to make files cleaner such that object-oriented design choices are emphasized.
 
 ## Project Structure
 
