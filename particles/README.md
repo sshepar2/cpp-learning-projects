@@ -7,6 +7,9 @@ A small C++ project demonstrating object-oriented design, static code analysis, 
 ```
 particles/
 ├── CMakeLists.txt          # top level build configuration
+├── build.sh                # alternate script to build
+├── check.sh                # script to run Cppcheck
+├── Makefile                # build/clean options if using make
 ├── src/
 │   ├── CMakeLists.txt      # defines library and executable
 │   ├── particle.cpp        # class implementations
