@@ -1,6 +1,6 @@
 PROJECT_NAME           = "Signal Analyzer"
-USE_MDFILE_AS_MAINPAGE = ./README.md
-INPUT                  = ./include ./src
+USE_MDFILE_AS_MAINPAGE = README.md
+INPUT                  = ./README.md ./include ./src
 RECURSIVE              = YES
 OUTPUT_DIRECTORY       = ../docs/signals/
 EXTRACT_ALL            = YES

@@ -1,6 +1,6 @@
 PROJECT_NAME           = "Particle Simulator"
-USE_MDFILE_AS_MAINPAGE = ./README.md
-INPUT                  = ./include ./src
+USE_MDFILE_AS_MAINPAGE = README.md
+INPUT                  = ./README.md ./include ./src
 RECURSIVE              = YES
 OUTPUT_DIRECTORY       = ../docs/particles/
 EXTRACT_ALL            = YES
