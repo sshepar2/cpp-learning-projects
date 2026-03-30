@@ -64,7 +64,28 @@ In production, this would be replaced with an optimized FFT library such as FFTW
 - Cppcheck run via `compile_commands.json` for accurate analysis with full compiler context
 - Clean output with no warnings or errors
 
-## Building
+## Key C++ Concepts Referenced
+
+- Pure virtual functions and abstract base classes
+- Constructor initialization lists
+- `const std::vector<double>&` pass by reference to avoid unnecessary copies
+- `std::complex<double>` for DFT arithmetic
+- `std::accumulate` from `<numeric>`
+- `std::mt19937` and `std::normal_distribution` for random number generation
+- `static_cast<int>` to avoid signed/unsigned comparison warnings
+- Signed integer arithmetic to avoid `size_t` underflow wrapping
+- Header/source separation with implementation details isolated in `.cpp` files
+- `#ifdef` compile guards for platform-specific alternatives
+- Doxygen docstrings (`@brief`, `@param`, `@return`, `@throws`, `@pre`) on class and function declarations in headers
+- Exception handling with `std::invalid_argument` from `<stdexcept>` for input validation in constructors and utility functions
+- `std::exception` base class catch-all in `main` for robust error reporting via `std::cerr`
+- `assert()` from `<cassert>` for internal precondition checks in utility functions where input is caller-controlled
+- Distinction between `@throws` (caller-facing validation) and `@pre` (internal assertion preconditions) in documentation
+- Awareness of safety-critical coding standards (JSF++, MISRA C++, DO-178C) and their restrictions on exceptions and dynamic allocation; this project follows simulation and ground support software conventions where standard C++ features are appropriate
+
+## Usage
+
+### Building
 
 #### Option 1: Using `cmake` directly
 
@@ -88,7 +109,7 @@ make
 
 Executable is written to `bin/process`.
 
-## Running Cppcheck
+### Running Cppcheck
 
 ```bash
 cppcheck --project=build/compile_commands.json --suppress=missingIncludeSystem
@@ -99,7 +120,7 @@ This command can also be run via
 ./check.sh
 ```
 
-## Cleaning
+### Cleaning
 
 ```
 rm -rf build/ bin/
@@ -111,27 +132,7 @@ or
 make clean
 ```
 
-## Key C++ Concepts Referenced
-
-- Pure virtual functions and abstract base classes
-- Constructor initialization lists
-- `const std::vector<double>&` pass by reference to avoid unnecessary copies
-- `std::complex<double>` for DFT arithmetic
-- `std::accumulate` from `<numeric>`
-- `std::mt19937` and `std::normal_distribution` for random number generation
-- `static_cast<int>` to avoid signed/unsigned comparison warnings
-- Signed integer arithmetic to avoid `size_t` underflow wrapping
-- Header/source separation with implementation details isolated in `.cpp` files
-- `#ifdef` compile guards for platform-specific alternatives
-- Doxygen docstrings (`@brief`, `@param`, `@return`, `@throws`, `@pre`) on class and function declarations in headers
-- Exception handling with `std::invalid_argument` from `<stdexcept>` for input validation in constructors and utility functions
-- `std::exception` base class catch-all in `main` for robust error reporting via `std::cerr`
-- `assert()` from `<cassert>` for internal precondition checks in utility functions where input is caller-controlled
-- Distinction between `@throws` (caller-facing validation) and `@pre` (internal assertion preconditions) in documentation
-- Awareness of safety-critical coding standards (JSF++, MISRA C++, DO-178C) and their restrictions on exceptions and dynamic allocation; this project follows simulation and ground support software conventions where standard C++ features are appropriate
-
-
-## Sample Output
+### Example Sample Output
 
 Running the pipeline on a signal composed of five sine wave components (1, 2, 3, 10, 20 Hz)
 with amplitudes (1, 2, 3, 4, 5) at 100 Hz sample rate, 20 seconds duration, and noise level 1.0:

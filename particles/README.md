@@ -50,7 +50,9 @@ particles/
 - `--suppress=missingIncludeSystem` suppresses noise from standard library headers while preserving warnings for project headers
 - Clean output — no warnings or errors on final version of code
 
-## Building
+## Usage
+
+### Building
 
 #### Option 1: Using `cmake` directly
 
@@ -75,7 +77,7 @@ make
 
 Executable is written to `bin/simulation`.
 
-## Running Cppcheck
+### Running Cppcheck
 
 ```bash
 cppcheck --project=build/compile_commands.json --suppress=missingIncludeSystem
@@ -86,7 +88,7 @@ This command can also be run via
 ./check.sh
 ```
 
-## Cleaning
+### Cleaning
 
 ```bash
 rm -rf build/ bin/

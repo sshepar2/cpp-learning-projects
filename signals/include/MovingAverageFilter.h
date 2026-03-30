@@ -18,7 +18,7 @@ private:
 public:
     /**
      * @brief Constructs a MovingAverageFilter with the specified window size.
-     * @param samples Time-domain input samples
+     * @param signalSamples Time-domain input samples
      * @param sampleRate Sampling rate in Hz
      * @param window Number of samples in the averaging window, must be positive
      *               and no greater than the number of samples

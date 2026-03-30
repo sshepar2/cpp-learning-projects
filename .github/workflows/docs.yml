@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install Doxygen
-        run: sudo apt install doxygen -y
+      - name: Install Doxygen and Graphviz
+        run: sudo apt install doxygen graphviz -y
 
       - name: Create docs directory
         run: mkdir -p docs
