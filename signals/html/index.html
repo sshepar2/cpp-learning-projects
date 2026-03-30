@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Signal Analyzer: Main Page</title>
+<title>Signal Analyzer: Signals — C++ Signal Processing Pipeline</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,10 +68,145 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Signal Analyzer Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Signals — C++ <a class="el" href="classSignal.html" title="Abstract base class representing a digitally sampled signal.">Signal</a> Processing Pipeline </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> A C++ project implementing a basic signal processing pipeline using object-oriented design. Generates a synthetic noisy signal and applies filtering via a moving average or band-pass filter. The band-pass filter implements a naive Discrete Fourier Transform (DFT) and inverse DFT to isolate frequency components of interest.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Project Structure</h1>
+<div class="fragment"><div class="line">signals/</div>
+<div class="line">├── CMakeLists.txt               # top level build configuration</div>
+<div class="line">├── build.sh                     # alternate script to build</div>
+<div class="line">├── check.sh                     # script to run Cppcheck</div>
+<div class="line">├── Makefile                     # build/clean options if using make</div>
+<div class="line">├── src/</div>
+<div class="line">│   ├── CMakeLists.txt           # defines library and executable</div>
+<div class="line">│   ├── Signal.cpp               # abstract base class</div>
+<div class="line">│   ├── NoisySignal.cpp          # raw unprocessed signal</div>
+<div class="line">│   ├── MovingAverageFilter.cpp  # low-pass smoothing filter</div>
+<div class="line">│   ├── BandPassFilter.cpp       # DFT-based band-pass filter</div>
+<div class="line">│   ├── utils.cpp                # signal generation utility</div>
+<div class="line">│   └── main.cpp                 # entry point</div>
+<div class="line">├── include/</div>
+<div class="line">│   ├── Signal.h                 # abstract base class</div>
+<div class="line">│   ├── NoisySignal.h            # raw unprocessed signal</div>
+<div class="line">│   ├── MovingAverageFilter.h    # low-pass smoothing filter</div>
+<div class="line">│   ├── BandPassFilter.h         # DFT-based band-pass filter</div>
+<div class="line">│   ├── utils.h                  # signal generation utility</div>
+<div class="line">├── bin/                         # compiled executable (generated)</div>
+<div class="line">└── build/                       # CMake build artifacts (generated)</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+What It Demonstrates</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Object-Oriented Design</h2>
+<ul>
+<li>Abstract base class <code><a class="el" href="classSignal.html" title="Abstract base class representing a digitally sampled signal.">Signal</a></code> with pure virtual <code>describe()</code> enforcing a common interface across all signal types</li>
+<li>Three derived classes each overriding <code>process()</code> and <code>describe()</code> with type-specific behavior</li>
+<li>Polymorphism via <code>Signal*</code> — <code>runPipeline</code> operates on any signal type without knowing the concrete type at compile time</li>
+<li>Implementation details (DFT, accumulate) isolated in <code>.cpp</code> files, keeping headers lean</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Signal Processing</h2>
+<ul>
+<li>Synthetic signal generation: superposition of sine wave components at specified frequencies and amplitudes with additive Gaussian noise (<code>std::mt19937</code>, <code>std::normal_distribution</code>)</li>
+<li>Moving average filter: sliding window smoothing with shrinking window at edges to preserve edge sample magnitude rather than zero-padding</li>
+<li>Band-pass filter: forward DFT, zeroing of frequency bins outside the specified band, inverse DFT to recover the filtered time-domain signal</li>
+<li>Frequency bin to physical frequency mapping: <code>freq = k * (sampleRate / N)</code></li>
+<li>Nyquist limit: only bins 0 to N/2 represent unique frequencies for a real-valued signal</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
+DFT Implementation</h2>
+<p>The naive $O(N^2)$ DFT is implemented directly rather than using a library, to demonstrate understanding of the underlying algorithm:</p>
+<p>$$ X[k] = \sum_{n=0}^{N-1} x[n] \, e^{-i2 \pi k n / N} \quad \text{(forward)} $$ $$ x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \, e^{i 2\pi k n / N} \quad \text{(inverse)} $$</p>
+<p>In production, this would be replaced with an optimized FFT library such as FFTW or Intel MKL.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Build System</h2>
+<ul>
+<li>CMake out-of-source build with <code>add_compile_options(-Wall -Wextra)</code> applied globally</li>
+<li>Source files compiled into an intermediate static library <code>signal_lib</code>, linked against the <code>process</code> executable</li>
+<li><code>CMAKE_EXPORT_COMPILE_COMMANDS=ON</code> for Cppcheck integration</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Static Code Analysis</h2>
+<ul>
+<li>Cppcheck run via <code>compile_commands.json</code> for accurate analysis with full compiler context</li>
+<li>Clean output with no warnings or errors</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Building</h1>
+<h3><a class="anchor" id="autotoc_md9"></a>
+Option 1: Using &lt;tt&gt;cmake&lt;/tt&gt; directly</h3>
+<div class="fragment"><div class="line">cmake -S. -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=ON</div>
+<div class="line">cmake --build build -j</div>
+</div><!-- fragment --> <h3><a class="anchor" id="autotoc_md10"></a>
+Option 2: Using bash script (just the runs &lt;tt&gt;cmake&lt;/tt&gt; comamnds in Option 1)</h3>
+<p>The build commands can also be run using the provided shell script, </p><div class="fragment"><div class="line">./build.sh</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
+Option 3: Using &lt;tt&gt;make&lt;/tt&gt;</h3>
+<p>There is a Makefile in which <code>build</code> and <code>clean</code> are defined. The executable can be generated by running, </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p>Executable is written to <code>bin/process</code>.</p>
+<h1><a class="anchor" id="autotoc_md12"></a>
+Running Cppcheck</h1>
+<div class="fragment"><div class="line">cppcheck --project=build/compile_commands.json --suppress=missingIncludeSystem</div>
+</div><!-- fragment --><p>This command can also be run via </p><div class="fragment"><div class="line">./check.sh</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+Cleaning</h1>
+<div class="fragment"><div class="line">rm -rf build/ bin/</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line">make clean</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
+Key C++ Concepts Referenced</h1>
+<ul>
+<li>Pure virtual functions and abstract base classes</li>
+<li>Constructor initialization lists</li>
+<li><code>const std::vector&lt;double&gt;&amp;</code> pass by reference to avoid unnecessary copies</li>
+<li><code>std::complex&lt;double&gt;</code> for DFT arithmetic</li>
+<li><code>std::accumulate</code> from <code>&lt;numeric&gt;</code></li>
+<li><code>std::mt19937</code> and <code>std::normal_distribution</code> for random number generation</li>
+<li><code>static_cast&lt;int&gt;</code> to avoid signed/unsigned comparison warnings</li>
+<li>Signed integer arithmetic to avoid <code>size_t</code> underflow wrapping</li>
+<li>Header/source separation with implementation details isolated in <code>.cpp</code> files</li>
+<li><code>#ifdef</code> compile guards for platform-specific alternatives</li>
+<li>Doxygen docstrings (<code>@brief</code>, <code>@param</code>, <code>@return</code>, <code>@throws</code>, <code>@pre</code>) on class and function declarations in headers</li>
+<li>Exception handling with <code>std::invalid_argument</code> from <code>&lt;stdexcept&gt;</code> for input validation in constructors and utility functions</li>
+<li><code>std::exception</code> base class catch-all in <code>main</code> for robust error reporting via <code>std::cerr</code></li>
+<li><code>assert()</code> from <code>&lt;cassert&gt;</code> for internal precondition checks in utility functions where input is caller-controlled</li>
+<li>Distinction between <code>@throws</code> (caller-facing validation) and <code>@pre</code> (internal assertion preconditions) in documentation</li>
+<li>Awareness of safety-critical coding standards (JSF++, MISRA C++, DO-178C) and their restrictions on exceptions and dynamic allocation; this project follows simulation and ground support software conventions where standard C++ features are appropriate</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md15"></a>
+Sample Output</h1>
+<p>Running the pipeline on a signal composed of five sine wave components (1, 2, 3, 10, 20 Hz) with amplitudes (1, 2, 3, 4, 5) at 100 Hz sample rate, 20 seconds duration, and noise level 1.0: </p><div class="fragment"><div class="line">Signal Type: Noisy/Raw Signal</div>
+<div class="line">Sample Count: 2000</div>
+<div class="line">Signal Statistics</div>
+<div class="line">  Energy Retained: 100 %</div>
+<div class="line">  Mean:            -0.0209001</div>
+<div class="line">  StdDev:          5.35432</div>
+<div class="line">  Min:             -14.618</div>
+<div class="line">  Max:             14.4214</div>
+<div class="line"> </div>
+<div class="line">Signal Type: Filtered-Averaged</div>
+<div class="line">Sample Count: 2000</div>
+<div class="line">Window Size: 10</div>
+<div class="line">Signal Statistics</div>
+<div class="line">  Energy Retained: 19.9789 %</div>
+<div class="line">  Mean:            -0.0200053</div>
+<div class="line">  StdDev:          2.39319</div>
+<div class="line">  Min:             -5.62451</div>
+<div class="line">  Max:             5.68606</div>
+<div class="line"> </div>
+<div class="line">Signal Type: Filtered-Band Pass</div>
+<div class="line">Sample Count: 2000</div>
+<div class="line">Frequency Range: 2-5 Hz</div>
+<div class="line">Signal Statistics</div>
+<div class="line">  Energy Retained: 5.87675 %</div>
+<div class="line">  Mean:            -2.60847e-16</div>
+<div class="line">  StdDev:          1.298</div>
+<div class="line">  Min:             -2.58183</div>
+<div class="line">  Max:             2.69539</div>
+</div><!-- fragment --><p>The moving average filter retains ~20% of signal energy, attenuating the 10 Hz and 20 Hz components whose periods fall at or below the 0.1 second averaging window. The band-pass filter isolates the 2 Hz and 3 Hz components, reducing energy to ~6% of the raw signal. The near-zero mean (-2.6e-16) in the band-pass output is expected floating point round-trip noise from the DFT/IDFT and confirms numerical correctness. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
