@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['idft_0',['idft',['../utils_8h.html#acbbc671b5d860d0b744d4e16666e0437',1,'idft(const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;dftSamples):&#160;utils.cpp'],['../utils_8cpp.html#acbbc671b5d860d0b744d4e16666e0437',1,'idft(const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;dftSamples):&#160;utils.cpp']]],
-  ['implementation_1',['DFT Implementation',['../index.html#autotoc_md5',1,'']]],
-  ['in_20option_201_2',['Option 2: Using bash script (just the runs &lt;tt&gt;cmake&lt;/tt&gt; comamnds in Option 1)',['../index.html#autotoc_md10',1,'']]],
-  ['it_20demonstrates_3',['What It Demonstrates',['../index.html#autotoc_md2',1,'']]]
+  ['generatesamples_0',['generatesamples',['../utils_8h.html#ac011755cc6bde48e291a3465c9068c39',1,'generateSamples(const std::vector&lt; double &gt; &amp;frequencies, const std::vector&lt; double &gt; &amp;amplitudes, double sampleRate, double duration, double noiseLevel):&#160;utils.cpp'],['../utils_8cpp.html#ac011755cc6bde48e291a3465c9068c39',1,'generateSamples(const std::vector&lt; double &gt; &amp;frequencies, const std::vector&lt; double &gt; &amp;amplitudes, double sampleRate, double duration, double noiseLevel):&#160;utils.cpp']]],
+  ['getsamplerate_1',['getSampleRate',['../classSignal.html#a7386abf1f8b1665fa84be74ac88922c9',1,'Signal']]],
+  ['getsamples_2',['getSamples',['../classSignal.html#ac9bf286e5353233b297bfa1c4e31cd1e',1,'Signal']]]
 ];

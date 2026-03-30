@@ -1,0 +1,28 @@
+<map id="include/Signal.h" name="include/Signal.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="369,5,494,31"/>
+<area shape="rect" id="Node000002" href="$BandPassFilter_8h.html" title=" " alt="" coords="231,79,410,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,40,340,81,337,76,401,36"/>
+<area shape="rect" id="Node000005" href="$MovingAverageFilter_8h.html" title=" " alt="" coords="434,79,653,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="463,36,526,76,524,81,460,40"/>
+<area shape="rect" id="Node000007" href="$NoisySignal_8h.html" title=" " alt="" coords="677,79,839,104"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="498,31,706,76,705,81,497,36"/>
+<area shape="rect" id="Node000009" href="$utils_8h.html" title=" " alt="" coords="93,79,207,104"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="374,37,196,81,195,76,372,31"/>
+<area shape="rect" id="Node000010" href="$utils_8cpp.html" title=" " alt="" coords="5,152,105,177"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="355,26,280,32,199,43,128,59,101,69,82,81,70,97,63,116,58,152,53,151,58,114,66,94,79,77,99,64,127,53,198,37,279,27,355,20"/>
+<area shape="rect" id="Node000011" href="$Signal_8cpp.html" title=" " alt="" coords="863,79,975,104"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="508,27,852,76,864,78,863,83,851,81,507,32"/>
+<area shape="rect" id="Node000003" href="$BandPassFilter_8cpp.html" title=" " alt="" coords="129,152,296,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="293,114,232,154,229,150,291,109"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title=" " alt="" coords="320,152,425,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="339,114,366,150,362,153,335,117"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="504,112,402,154,400,149,502,107"/>
+<area shape="rect" id="Node000006" href="$MovingAverageFilter_8cpp.html" title=" " alt="" coords="450,152,655,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="549,117,554,152,549,152,544,118"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="683,109,426,156,425,151,682,104"/>
+<area shape="rect" id="Node000008" href="$NoisySignal_8cpp.html" title=" " alt="" coords="683,152,833,177"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="761,118,761,152,755,152,755,118"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="171,113,205,150,201,154,167,116"/>
+<area shape="poly" id="edge12_Node000009_Node000004" title=" " alt="" coords="199,106,337,149,336,154,198,111"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="125,114,72,154,69,150,122,110"/>
+</map>

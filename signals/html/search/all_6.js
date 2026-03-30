@@ -5,6 +5,6 @@ var searchData=
   ['design_2',['Object-Oriented Design',['../index.html#autotoc_md3',1,'']]],
   ['dft_3',['dft',['../utils_8h.html#a238c3f2cb94d8e14c6f1cf2cfe049d67',1,'dft(const std::vector&lt; double &gt; &amp;samples):&#160;utils.cpp'],['../utils_8cpp.html#a238c3f2cb94d8e14c6f1cf2cfe049d67',1,'dft(const std::vector&lt; double &gt; &amp;samples):&#160;utils.cpp']]],
   ['dft_20implementation_4',['DFT Implementation',['../index.html#autotoc_md5',1,'']]],
-  ['directly_5',['Option 1: Using &lt;tt&gt;cmake&lt;/tt&gt; directly',['../index.html#autotoc_md9',1,'']]],
+  ['directly_5',['Option 1: Using &lt;tt&gt;cmake&lt;/tt&gt; directly',['../index.html#autotoc_md11',1,'']]],
   ['dominantfrequency_6',['dominantfrequency',['../utils_8h.html#a33f8a61fd2eb797f08f10830d9c2eba8',1,'dominantFrequency(const std::vector&lt; double &gt; &amp;samples, double sampleRate):&#160;utils.cpp'],['../utils_8cpp.html#a33f8a61fd2eb797f08f10830d9c2eba8',1,'dominantFrequency(const std::vector&lt; double &gt; &amp;samples, double sampleRate):&#160;utils.cpp']]]
 ];

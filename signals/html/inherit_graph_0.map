@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classSignal.html" title="Abstract base class representing a digitally sampled signal." alt="" coords="5,55,68,80"/>
+<area shape="rect" id="Node000001" href="$classBandPassFilter.html" title="Band&#45;pass filter that isolates a frequency range using the DFT." alt="" coords="135,5,253,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="80,51,115,39,151,28,152,33,117,45,82,56"/>
+<area shape="rect" id="Node000002" href="$classMovingAverageFilter.html" title="Low&#45;pass filter that smooths a signal using a sliding window average." alt="" coords="116,55,272,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="82,65,116,65,116,70,82,70"/>
+<area shape="rect" id="Node000003" href="$classNoisySignal.html" title="Represents a raw unprocessed signal with no filtering applied." alt="" coords="145,104,243,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="82,79,153,101,152,106,81,84"/>
+</map>
