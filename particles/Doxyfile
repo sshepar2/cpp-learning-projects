@@ -1,8 +1,8 @@
-PROJECT_NAME           = "Signal Analyzer"
+PROJECT_NAME           = "Particle Simulator"
 USE_MDFILE_AS_MAINPAGE = ./README.md
 INPUT                  = ./include ./src
 RECURSIVE              = YES
-OUTPUT_DIRECTORY       = ../docs/signals/
+OUTPUT_DIRECTORY       = ../docs/particles/
 EXTRACT_ALL            = YES
 GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
