@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7esignal_0',['~Signal',['../classSignal.html#a8d21bf638b038e1561e13688460d7e06',1,'Signal']]]
+  ['—_20c_20signal_20processing_20pipeline_0',['Signals — C++ Signal Processing Pipeline',['../index.html',1,'']]]
 ];

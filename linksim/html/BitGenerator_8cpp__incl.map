@@ -1,0 +1,11 @@
+<map id="src/BitGenerator.cpp" name="src/BitGenerator.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="11,5,165,31"/>
+<area shape="rect" id="Node000002" href="$BitGenerator_8h.html" title=" " alt="" coords="30,79,146,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,31,91,65,85,65,85,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,77,177"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="67,33,41,52,20,80,16,94,17,110,29,139,24,141,12,111,11,94,15,78,37,49,64,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="103,152,166,177"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="112,29,139,49,161,78,165,94,164,111,152,141,147,139,159,110,160,94,156,80,135,52,109,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,106,59,142,54,139,78,103"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="98,103,122,139,117,142,93,106"/>
+</map>

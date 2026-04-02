@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['just_20the_20runs_20tt_20cmake_20tt_20comamnds_20in_20option_201_0',['Option 2: Using bash script (just the runs &lt;tt&gt;cmake&lt;/tt&gt; comamnds in Option 1)',['../index.html#autotoc_md12',1,'']]]
+  ['key_20c_20concepts_20referenced_0',['Key C++ Concepts Referenced',['../index.html#autotoc_md16',1,'']]]
 ];
