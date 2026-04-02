@@ -10,6 +10,7 @@ particles/
 ├── build.sh                # alternate script to build
 ├── check.sh                # script to run Cppcheck
 ├── Makefile                # build/clean options if using make
+├── Doxyfile                # config for generating documentation
 ├── src/
 │   ├── CMakeLists.txt      # defines library and executable
 │   ├── particle.cpp        # class implementations

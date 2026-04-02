@@ -26,6 +26,11 @@ jobs:
           cd signals
           doxygen Doxyfile
 
+      - name: Run Doxygen for linksim
+        run: |
+          cd linksim
+          doxygen Doxyfile
+
       - name: Copy landing page
         run: cp index.html docs/index.html
 

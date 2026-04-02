@@ -10,6 +10,7 @@ signals/
 ├── build.sh                     # alternate script to build
 ├── check.sh                     # script to run Cppcheck
 ├── Makefile                     # build/clean options if using make
+├── Doxyfile                     # config for generating documentation
 ├── src/
 │   ├── CMakeLists.txt           # defines library and executable
 │   ├── Signal.cpp               # abstract base class
@@ -64,25 +65,6 @@ In production, this would be replaced with an optimized FFT library such as FFTW
 - Cppcheck run via `compile_commands.json` for accurate analysis with full compiler context
 - Clean output with no warnings or errors
 
-## Key C++ Concepts Referenced
-
-- Pure virtual functions and abstract base classes
-- Constructor initialization lists
-- `const std::vector<double>&` pass by reference to avoid unnecessary copies
-- `std::complex<double>` for DFT arithmetic
-- `std::accumulate` from `<numeric>`
-- `std::mt19937` and `std::normal_distribution` for random number generation
-- `static_cast<int>` to avoid signed/unsigned comparison warnings
-- Signed integer arithmetic to avoid `size_t` underflow wrapping
-- Header/source separation with implementation details isolated in `.cpp` files
-- `#ifdef` compile guards for platform-specific alternatives
-- Doxygen docstrings (`@brief`, `@param`, `@return`, `@throws`, `@pre`) on class and function declarations in headers
-- Exception handling with `std::invalid_argument` from `<stdexcept>` for input validation in constructors and utility functions
-- `std::exception` base class catch-all in `main` for robust error reporting via `std::cerr`
-- `assert()` from `<cassert>` for internal precondition checks in utility functions where input is caller-controlled
-- Distinction between `@throws` (caller-facing validation) and `@pre` (internal assertion preconditions) in documentation
-- Awareness of safety-critical coding standards (JSF++, MISRA C++, DO-178C) and their restrictions on exceptions and dynamic allocation; this project follows simulation and ground support software conventions where standard C++ features are appropriate
-
 ## Usage
 
 ### Building
@@ -132,7 +114,7 @@ or
 make clean
 ```
 
-### Example Sample Output
+### Sample Output
 
 Running the pipeline on a signal composed of five sine wave components (1, 2, 3, 10, 20 Hz)
 with amplitudes (1, 2, 3, 4, 5) at 100 Hz sample rate, 20 seconds duration, and noise level 1.0:
@@ -172,3 +154,33 @@ components whose periods fall at or below the 0.1 second averaging window. The b
 filter isolates the 2 Hz and 3 Hz components, reducing energy to ~6% of the raw signal.
 The near-zero mean (-2.6e-16) in the band-pass output is expected floating point round-trip
 noise from the DFT/IDFT and confirms numerical correctness.
+
+Here's a plot using a different `main.cpp` to show more complicated usage.
+The raw signal is passed to a moving average filter and a band pass filter
+separately, and also through a band pass filter then a moving average filter
+in succession. In this case the signal consists of eight sine waves 
+(0.5, 1, 2, 3, 10, 20, 25, 30) with amplitudes (3, 1, 2, 1, 4, 8, 2, 5) 
+at 100 Hz sample rate, 6 seconds duration, and noise level 5.0:
+
+<img src="./signals.png" alt="Applying Various Filters" width="70%"/>
+
+## Key C++ Concepts Referenced
+
+- Pure virtual functions and abstract base classes
+- Constructor initialization lists
+- `const std::vector<double>&` pass by reference to avoid unnecessary copies
+- `std::complex<double>` for DFT arithmetic
+- `std::accumulate` from `<numeric>`
+- `std::mt19937` and `std::normal_distribution` for random number generation
+- `static_cast<int>` to avoid signed/unsigned comparison warnings
+- Signed integer arithmetic to avoid `size_t` underflow wrapping
+- Header/source separation with implementation details isolated in `.cpp` files
+- `#ifdef` compile guards for platform-specific alternatives
+- Doxygen docstrings (`@brief`, `@param`, `@return`, `@throws`, `@pre`) on class and function declarations in headers
+- Exception handling with `std::invalid_argument` from `<stdexcept>` for input validation in constructors and utility functions
+- `std::exception` base class catch-all in `main` for robust error reporting via `std::cerr`
+- `assert()` from `<cassert>` for internal precondition checks in utility functions where input is caller-controlled
+- Distinction between `@throws` (caller-facing validation) and `@pre` (internal assertion preconditions) in documentation
+- Awareness of safety-critical coding standards (JSF++, MISRA C++, DO-178C) and their restrictions on exceptions and dynamic allocation; this project follows simulation and ground support software conventions where standard C++ features are appropriate
+
+

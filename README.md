@@ -14,6 +14,9 @@ A class hierarchy representing particles in a physics simulation. Covers abstrac
 ### [signals](./signals/)
 A signal processing pipeline that generates synthetic noisy signals and applies moving average or band-pass filtering. The band-pass filter implements a discrete Fourier transform (DFT) and inverse DFT to isolate frequency components. Covers OOP pipeline design, complex number arithmetic, CMake static library linking, signed/unsigned integer handling, error handling, and docstring.
  
+### [linksim](./linksim/)
+A BPSK digital communications link simulation. Generates random bit sequences, modulates to IQ symbols, transmits through an AWGN channel, and computes BER across a sweep of SNR values. Outputs a BER vs SNR curve for link budget analysis.
+
 ## Building Any Project
  
 Each project contains its own `README.md` with specific build instructions. All projects use CMake and follow the same general pattern:
@@ -26,7 +29,7 @@ cmake --build build -j
  
 ## Requirements
  
-- C++14 or later
+- C++17 or later
 - CMake 3.10 or later
 - g++
 - Cppcheck (optional, for static analysis)

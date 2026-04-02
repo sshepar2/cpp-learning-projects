@@ -1,0 +1,9 @@
+PROJECT_NAME           = "Link Simulator"
+USE_MDFILE_AS_MAINPAGE = README.md
+INPUT                  = ./README.md ./include ./src
+RECURSIVE              = YES
+OUTPUT_DIRECTORY       = ../docs/linksim/
+EXTRACT_ALL            = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+QUIET                  = YES

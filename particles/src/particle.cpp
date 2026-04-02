@@ -25,10 +25,10 @@ float ClassicalParticle::kineticEnergy() {
 }
 
 void ClassicalParticle::describe() {
-    std::cout << "Type: Classical" << std::endl;
-    std::cout << "Position: " << getPosition()[0] << ", " << getPosition()[1] << ", " << getPosition()[2] << std::endl;
-    std::cout << "Velocity: " << velocity[0] << ", " << velocity[1] << ", " << velocity[2] << std::endl;
-    std::cout << "Mass: " << getMass() << std::endl;
+    std::cout << "Type: Classical" << "\n";
+    std::cout << "Position: " << getPosition()[0] << ", " << getPosition()[1] << ", " << getPosition()[2] << "\n";
+    std::cout << "Velocity: " << velocity[0] << ", " << velocity[1] << ", " << velocity[2] << "\n";
+    std::cout << "Mass: " << getMass() << "\n";
 }
 
 // QuantumParticle methods
@@ -36,8 +36,8 @@ QuantumParticle::QuantumParticle(float x, float y, float z, float particleMass, 
     : Particle{x, y, z, particleMass}, spin{particleSpin}, type{particleType} {}
 
 void QuantumParticle::describe() {
-    std::cout << "Type: " << type << std::endl;
-    std::cout << "Spin: " << spin << std::endl;
-    std::cout << "Position: " << getPosition()[0] << ", " << getPosition()[1] << ", " << getPosition()[2] << std::endl;
-    std::cout << "Mass: " << getMass() << std::endl;
+    std::cout << "Type: " << type << "\n";
+    std::cout << "Spin: " << spin << "\n";
+    std::cout << "Position: " << getPosition()[0] << ", " << getPosition()[1] << ", " << getPosition()[2] << "\n";
+    std::cout << "Mass: " << getMass() << "\n";
 }
