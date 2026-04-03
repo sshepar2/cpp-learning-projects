@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Link Simulator: Link Simulation — BPSK Digital Communications</title>
+<title>Link Simulator: Link Simulation — BPSK/QPSK Digital Communications</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,10 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Link Simulation — <a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a> Digital Communications </div></div>
+  <div class="headertitle"><div class="title">Link Simulation — BPSK/QPSK Digital Communications </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> A C++ simulation of a digital communications link implementing <a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a> (Binary Phase Shift Keying) modulation. Generates random bit sequences, modulates them to IQ symbols, transmits through a simulated AWGN channel, demodulates, and computes Bit Error Rate (BER) across a sweep of SNR values. Output is a BER vs SNR curve written to CSV, suitable for plotting and link budget analysis.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> A C++ simulation of a digital communications link implementing <a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a> (Binary Phase Shift Keying) and <a class="el" href="structQPSK.html" title="QPSK (Quadrature Phase-Shift Keying) modulation scheme policy struct.">QPSK</a> (Quadrature Phase Shift Keying) modulation. Generates random bit sequences, modulates them to IQ symbols, transmits through a simulated AWGN channel, demodulates, and computes Bit Error Rate (BER) across a sweep of SNR values. Output is a BER vs SNR curve written to CSV, suitable for plotting and link budget analysis.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Project Structure</h1>
 <div class="fragment"><div class="line">linksim/</div>
@@ -82,11 +82,13 @@ Project Structure</h1>
 <div class="line">│   ├── CMakeLists.txt              # defines executable</div>
 <div class="line">│   ├── main.cpp                    # entry point, orchestrates pipeline</div>
 <div class="line">│   ├── BPSK.cpp                    # BPSK encode/decode implementation</div>
+<div class="line">│   ├── QPSK.cpp                    # QPSK encode/decode implementation</div>
 <div class="line">│   ├── Channel.cpp                 # AWGN noise channel</div>
 <div class="line">│   ├── BitGenerator.cpp            # reproducible random bit generation</div>
 <div class="line">│   └── utils.cpp                   # config parsing, CSV output</div>
 <div class="line">├── include/</div>
 <div class="line">│   ├── BPSK.h                      # BPSK modulation policy struct</div>
+<div class="line">│   ├── QPSK.h                      # QPSK modulation policy struct</div>
 <div class="line">│   ├── Channel.h                   # channel class declaration</div>
 <div class="line">│   ├── BitGenerator.h              # bit generator class declaration</div>
 <div class="line">│   ├── LinkSimulation.h            # templated simulation orchestrator</div>
@@ -105,6 +107,7 @@ What It Demonstrates</h1>
 Digital Communications</h2>
 <ul>
 <li><a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a> modulation — bit 0 maps to {+1, 0}, bit 1 maps to {-1, 0} in the IQ plane</li>
+<li><a class="el" href="structQPSK.html" title="QPSK (Quadrature Phase-Shift Keying) modulation scheme policy struct.">QPSK</a> modulation — same mapping as <a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a> where a second bit is stored on the Q axis</li>
 <li>AWGN channel model — independent complex Gaussian noise on I and Q components</li>
 <li>Noise standard deviation derived from SNR: <code>σ = sqrt(1 / (2 * 10^(SNR_dB/10)))</code></li>
 <li>Bit error rate computed as fraction of incorrectly decoded bits</li>
@@ -113,7 +116,7 @@ Digital Communications</h2>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Object-Oriented and Template Design</h2>
 <ul>
-<li>Policy-based template design — <code><a class="el" href="classLinkSimulation.html" title="Orchestrates a digital link simulation and computes BER vs SNR.">LinkSimulation</a>&lt;<a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a>&gt;</code> uses <code><a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a></code> as a compile-time policy, enforcing a static interface contract (<code>encode</code>, <code>decode</code>, <code>BITS_PER_SYMBOL</code>)</li>
+<li>Policy-based template design — <code><a class="el" href="classLinkSimulation.html" title="Orchestrates a digital link simulation and computes BER vs SNR.">LinkSimulation</a>&lt;ModScheme&gt;</code> uses <code><a class="el" href="structBPSK.html" title="BPSK (Binary Phase Shift Keying) modulation scheme policy struct.">BPSK</a></code> or <code><a class="el" href="structQPSK.html" title="QPSK (Quadrature Phase-Shift Keying) modulation scheme policy struct.">QPSK</a></code> as a compile-time policy, enforcing a static interface contract (<code>encode</code>, <code>decode</code>, <code>BITS_PER_SYMBOL</code>)</li>
 <li><code>static constexpr</code> member for compile-time constant <code>BITS_PER_SYMBOL</code></li>
 <li>Clean separation of concerns — <code><a class="el" href="classBitGenerator.html" title="Generates reproducible random bit sequences.">BitGenerator</a></code>, <code><a class="el" href="classChannel.html" title="Models a noisy transmission channel.">Channel</a></code>, and <code><a class="el" href="classLinkSimulation.html" title="Orchestrates a digital link simulation and computes BER vs SNR.">LinkSimulation</a></code> each own a single responsibility</li>
 <li><code><a class="el" href="classChannel.html" title="Models a noisy transmission channel.">Channel</a></code> constructed once and reused across SNR sweep, rather than reinstantiated per point</li>
@@ -164,7 +167,7 @@ Configuration</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Field   </th><th class="markdownTableHeadNone">Description    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>modulation</code>   </td><td class="markdownTableBodyNone">Modulation scheme. Currently <code>"BPSK"</code> only    </td></tr>
+<td class="markdownTableBodyNone"><code>modulation</code>   </td><td class="markdownTableBodyNone">Modulation scheme. Currently <code>"BPSK"</code> or <code>"QPSK"</code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>num_bits</code>   </td><td class="markdownTableBodyNone">Bits simulated per SNR point. Higher = more accurate BER at low error rates    </td></tr>
 <tr class="markdownTableRowOdd">

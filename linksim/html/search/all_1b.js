@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['x_0',['x',['../structdetail_1_1is__ordered__map_1_1two.html#a762e0d409e9c4f003df0638c04dfa3c8',1,'detail::is_ordered_map::two']]]
+  ['what_0',['what',['../classdetail_1_1exception.html#ae75d7315f5f2d85958da6d961375caf0',1,'detail::exception']]],
+  ['what_20it_20demonstrates_1',['What It Demonstrates',['../index.html#autotoc_md2',1,'']]],
+  ['writecsv_2',['writecsv',['../utils_8h.html#a4df9f8390029600be33b8ec0d49287b6',1,'writeCSV(const std::string &amp;path, const std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;berCurve):&#160;utils.cpp'],['../utils_8cpp.html#a4df9f8390029600be33b8ec0d49287b6',1,'writeCSV(const std::string &amp;path, const std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;berCurve):&#160;utils.cpp']]]
 ];

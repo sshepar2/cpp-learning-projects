@@ -86,13 +86,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a364bc1032b64e05ad42186aa23945e70" id="r_a364bc1032b64e05ad42186aa23945e70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a364bc1032b64e05ad42186aa23945e70">Channel</a> (const std::string &amp;noiseModel=&quot;AWGN&quot;)</td></tr>
 <tr class="memdesc:a364bc1032b64e05ad42186aa23945e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classChannel.html" title="Models a noisy transmission channel.">Channel</a> with the specified noise model.  <br /></td></tr>
 <tr class="separator:a364bc1032b64e05ad42186aa23945e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60186f1c999e31c9d6a39ea580f70f95" id="r_a60186f1c999e31c9d6a39ea580f70f95"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a60186f1c999e31c9d6a39ea580f70f95">transmit</a> (const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;symbols, const double snrDb) const</td></tr>
-<tr class="memdesc:a60186f1c999e31c9d6a39ea580f70f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmits IQ symbols through the channel, adding noise.  <br /></td></tr>
-<tr class="separator:a60186f1c999e31c9d6a39ea580f70f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf3abb3705c3a0c3760264feb5840c43" id="r_aaf3abb3705c3a0c3760264feb5840c43"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::complex&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#aaf3abb3705c3a0c3760264feb5840c43">transmit</a> (const std::vector&lt; std::complex&lt; double &gt; &gt; &amp;symbols, const double snrSymbol) const</td></tr>
+<tr class="memdesc:aaf3abb3705c3a0c3760264feb5840c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmits IQ symbols through the channel, adding noise.  <br /></td></tr>
+<tr class="separator:aaf3abb3705c3a0c3760264feb5840c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Models a noisy transmission channel. </p>
-<p>Adds complex Gaussian noise to IQ symbols to simulate transmission impairments. The noise power is determined by the SNR passed to <a class="el" href="classChannel.html#a60186f1c999e31c9d6a39ea580f70f95" title="Transmits IQ symbols through the channel, adding noise.">transmit()</a>, allowing the same <a class="el" href="classChannel.html" title="Models a noisy transmission channel.">Channel</a> instance to be reused across multiple SNR values in a sweep.</p>
+<p>Adds complex Gaussian noise to IQ symbols to simulate transmission impairments. The noise power is determined by the SNR per symbol passed to <a class="el" href="classChannel.html#aaf3abb3705c3a0c3760264feb5840c43" title="Transmits IQ symbols through the channel, adding noise.">transmit()</a>, allowing the same <a class="el" href="classChannel.html" title="Models a noisy transmission channel.">Channel</a> instance to be reused across multiple SNR values in a sweep.</p>
 <p>Currently supports AWGN (Additive White Gaussian Noise) only. Independent Gaussian noise is added to both I and Q components. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a364bc1032b64e05ad42186aa23945e70" name="a364bc1032b64e05ad42186aa23945e70"></a>
@@ -128,8 +128,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a60186f1c999e31c9d6a39ea580f70f95" name="a60186f1c999e31c9d6a39ea580f70f95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60186f1c999e31c9d6a39ea580f70f95">&#9670;&#160;</a></span>transmit()</h2>
+<a id="aaf3abb3705c3a0c3760264feb5840c43" name="aaf3abb3705c3a0c3760264feb5840c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf3abb3705c3a0c3760264feb5840c43">&#9670;&#160;</a></span>transmit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +144,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>snrDb</em>&#160;</td>
+          <td class="paramname"><em>snrSymbol</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -159,7 +159,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">symbols</td><td>Input IQ symbols to corrupt </td></tr>
-    <tr><td class="paramname">snrDb</td><td>Signal to noise ratio in dB </td></tr>
+    <tr><td class="paramname">snrSymbol</td><td>Signal to noise ratio per symbol (Es/N0) in dB </td></tr>
   </table>
   </dd>
 </dl>

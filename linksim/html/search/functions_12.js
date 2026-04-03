@@ -12,7 +12,7 @@ var searchData=
   ['to_5fstring_9',['to_string',['../json_8hpp.html#a5b9ca6dc52cf4226c68d67f895b2a1d4',1,'to_string():&#160;json.hpp'],['../classjson__pointer.html#a6b94e2003be4cd72c4f145bcea2578ec',1,'json_pointer::to_string()']]],
   ['to_5fubjson_10',['to_ubjson',['../classbasic__json.html#ab8b6c6cc3ba1b49af628fe0ec8c73b77',1,'basic_json::to_ubjson(const basic_json &amp;j, detail::output_adapter&lt; char &gt; o, const bool use_size=false, const bool use_type=false)'],['../classbasic__json.html#ada3d71f1dcfea24465d364b815d11445',1,'basic_json::to_ubjson(const basic_json &amp;j, detail::output_adapter&lt; std::uint8_t &gt; o, const bool use_size=false, const bool use_type=false)'],['../classbasic__json.html#a906e81d488ebcac169960a1d48f6b065',1,'basic_json::to_ubjson(const basic_json &amp;j, const bool use_size=false, const bool use_type=false)']]],
   ['token_5ftype_5fname_11',['token_type_name',['../classdetail_1_1lexer__base.html#aadef66e89ad828e5f69479c85887fa6d',1,'detail::lexer_base']]],
-  ['transmit_12',['transmit',['../classChannel.html#a60186f1c999e31c9d6a39ea580f70f95',1,'Channel']]],
+  ['transmit_12',['transmit',['../classChannel.html#aaf3abb3705c3a0c3760264feb5840c43',1,'Channel']]],
   ['type_13',['type',['../classbasic__json.html#ac5e52dbb3cb4e9fcabd1b88c37985aef',1,'basic_json']]],
   ['type_5fname_14',['type_name',['../classbasic__json.html#a15b177614647598e238e15ab1cc889c7',1,'basic_json']]]
 ];

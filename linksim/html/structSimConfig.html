@@ -84,7 +84,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8645e78abd181aa91b8341259fe6db8e" id="r_a8645e78abd181aa91b8341259fe6db8e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimConfig.html#a8645e78abd181aa91b8341259fe6db8e">modulation</a></td></tr>
-<tr class="memdesc:a8645e78abd181aa91b8341259fe6db8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modulation scheme identifier e.g. "BPSK".  <br /></td></tr>
+<tr class="memdesc:a8645e78abd181aa91b8341259fe6db8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modulation scheme identifier, only "BPSK" or "QPSK".  <br /></td></tr>
 <tr class="separator:a8645e78abd181aa91b8341259fe6db8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad51b2d82c0e7ad333571b4c2ab745dcf" id="r_ad51b2d82c0e7ad333571b4c2ab745dcf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimConfig.html#ad51b2d82c0e7ad333571b4c2ab745dcf">numBits</a></td></tr>
 <tr class="memdesc:ad51b2d82c0e7ad333571b4c2ab745dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits per SNR points.  <br /></td></tr>
@@ -99,7 +99,7 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:acbb3ea485749770d45f0b4812caf7de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">SNR step size in dB.  <br /></td></tr>
 <tr class="separator:acbb3ea485749770d45f0b4812caf7de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04e7d15e62d8ec1aa5ce6410f6d4ce93" id="r_a04e7d15e62d8ec1aa5ce6410f6d4ce93"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimConfig.html#a04e7d15e62d8ec1aa5ce6410f6d4ce93">noiseModel</a></td></tr>
-<tr class="memdesc:a04e7d15e62d8ec1aa5ce6410f6d4ce93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Noise model identifier, e.g. "AWGN".  <br /></td></tr>
+<tr class="memdesc:a04e7d15e62d8ec1aa5ce6410f6d4ce93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Noise model identifier, only "AWGN".  <br /></td></tr>
 <tr class="separator:a04e7d15e62d8ec1aa5ce6410f6d4ce93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74c9282787cda50140635646cc645034" id="r_a74c9282787cda50140635646cc645034"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimConfig.html#a74c9282787cda50140635646cc645034">seed</a></td></tr>
 <tr class="memdesc:a74c9282787cda50140635646cc645034"><td class="mdescLeft">&#160;</td><td class="mdescRight">RNG seed for reproducibility.  <br /></td></tr>
@@ -110,7 +110,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration parameters for a link simulation run. </p>
-<p>Populated by parseing a JSON config file. Controls modulation scheme, bit count, SNR sweep range, noise model, and output destination </p>
+<p>Populated by parseing a JSON config file. Controls modulation scheme, bit count, SNR sweep range, noise model, and output destination. SNR is the SNR ber bit (Eb/N0), which is the energy per bit to noise power spectral density ratio. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8645e78abd181aa91b8341259fe6db8e" name="a8645e78abd181aa91b8341259fe6db8e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8645e78abd181aa91b8341259fe6db8e">&#9670;&#160;</a></span>modulation</h2>
@@ -124,7 +124,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Modulation scheme identifier e.g. "BPSK". </p>
+<p>Modulation scheme identifier, only "BPSK" or "QPSK". </p>
 
 </div>
 </div>
@@ -140,7 +140,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Noise model identifier, e.g. "AWGN". </p>
+<p>Noise model identifier, only "AWGN". </p>
 
 </div>
 </div>
