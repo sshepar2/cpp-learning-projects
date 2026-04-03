@@ -9,9 +9,9 @@
  * @brief Models a noisy transmission channel.
  *
  * Adds complex Gaussian noise to IQ symbols to simulate transmission
- * impairments. The noise power is determined by the SNR passed to
- * transmit(), allowing the same Channel instance to be reused across
- * multiple SNR values in a sweep.
+ * impairments. The noise power is determined by the SNR per symbol 
+ * passed to transmit(), allowing the same Channel instance to be reused
+ * across multiple SNR values in a sweep.
  *
  * Currently supports AWGN (Additive White Gaussian Noise) only.
  * Independent Gaussian noise is added to both I and Q components.
@@ -34,12 +34,12 @@ public:
      * signal power: sigma = sqrt(1 / (2 * 10^(snrDb/10)))
      *
      * @param symbols Input IQ symbols to corrupt
-     * @param snrDb Signal to noise ratio in dB
+     * @param snrSymbol Signal to noise ratio per symbol (Es/N0) in dB
      * @return Noise-corrupted IQ symbols
      */
     std::vector<std::complex<double>> transmit(
         const std::vector<std::complex<double>>& symbols,
-        const double snrDb
+        const double snrSymbol
     ) const;
 };
 

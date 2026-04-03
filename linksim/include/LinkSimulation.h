@@ -4,6 +4,7 @@
 #include "BitGenerator.h"
 #include "Channel.h"
 
+#include <cmath>
 #include <random>
 #include <stdexcept>
 #include <string>
@@ -37,21 +38,18 @@
 template <typename ModScheme>
 class LinkSimulation {
 private:
-    int nBits;
-    BitGenerator bitGen;
+    std::vector<int> bits;
+    std::vector<std::complex<double>> symbols;
     Channel channel;
 
     /**
      * @brief Computes bit error rate between transmitted and received bits.
-     * @param bits Original transmitted bits
      * @param decoded Received bits after demodulation
      * @return Fraction of bits received incorrectly in range [0, 1]
      */
-    double computeBER(
-        const std::vector<int>& bits, 
-        const std::vector<int>& decoded
-    ) const {
+    double computeBER(const std::vector<int>& decoded) const {
         double errors = 0.0;
+        int nBits = static_cast<int>(decoded.size());
         for (int i = 0; i < nBits; i++) {
             errors += (decoded[i] != bits[i] ? 1.0 : 0.0);
         }
@@ -59,16 +57,19 @@ private:
     }
 
     /**
-     * @brief Runs one simulation at a given SNR and returns BER.
-     * @param snrDb Signal to noise ratio in dB
+     * @brief Runs one simulation at a given SNR per bit and returns BER.
+     * Internally converts from Eb/N0 (SNR per bit) to Es/N0 (SNR per symbol)
+     * for applying noise to symbols appropriately.
+     * @param snrDb Signal to noise ratio per bit in dB
      * @return Bit error rate at this SNR
      */
     double runAtSNR(double snrDb) const {
-        std::vector<int> bits = bitGen.generate(nBits);
-        std::vector<std::complex<double>> symbols = ModScheme::encode(bits);
-        std::vector<std::complex<double>> received = channel.transmit(symbols, snrDb);
+        double snrSymbol = snrDb + 10 * std::log10(
+            static_cast<double>(ModScheme::BITS_PER_SYMBOL)
+        );
+        std::vector<std::complex<double>> received = channel.transmit(symbols, snrSymbol);
         std::vector<int> decoded = ModScheme::decode(received);
-        return computeBER(bits, decoded);
+        return computeBER(decoded);
     }
 
 public:
@@ -82,16 +83,23 @@ public:
      */
     LinkSimulation(
         int nBits,
-        std::string noiseModel = "AWGN",
+        std::string& noiseModel = "AWGN",
         unsigned int seed = std::random_device{}()
-    ) : nBits{nBits}, bitGen{seed}, channel{noiseModel} {
+    ) : channel{noiseModel} {
         if (nBits <= 0) 
             throw std::invalid_argument("nBits must be positive");
+        if (nBits % ModScheme::BITS_PER_SYMBOL != 0)
+            throw std::invalid_argument("nBits must be divisible by BITS_PER_SYMBOL");
+        bits = BitGenerator(seed).generate(nBits);
+        symbols = ModScheme::encode(bits);
     }
 
     /**
      * @brief Sweeps over SNR values and returns a BER curve.
      *
+     * Generates encoded bits using LinkSimulation's nBits and 
+     * ModScheme:encode method. Calls runAtSNR as each snr in sweep.
+     * 
      * Each point in the returned vector is a {snr_db, ber} pair.
      * Results are suitable for direct output to CSV and plotting
      * on a logarithmic BER axis.

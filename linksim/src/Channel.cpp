@@ -14,13 +14,13 @@ Channel::Channel(const std::string& noiseModel) : noiseModel{noiseModel} {
 
 std::vector<std::complex<double>> Channel::transmit(
     const std::vector<std::complex<double>>& symbols,
-    const double snrDb
+    const double snrSymbol
 ) const {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::normal_distribution<double> noise(
         0.0, 
-        std::sqrt(1.0 / (2.0 * std::pow(10.0, snrDb / 10.0)))
+        std::sqrt(1.0 / (2.0 * std::pow(10.0, snrSymbol / 10.0)))
     );
     std::vector<std::complex<double>> noisySymbols;
     for (auto& symbol : symbols) {

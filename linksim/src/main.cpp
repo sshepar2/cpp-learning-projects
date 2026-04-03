@@ -1,4 +1,5 @@
 #include "BPSK.h"
+#include "QPSK.h"
 #include "LinkSimulation.h"
 #include "SimConfig.h"
 #include "utils.h"
@@ -21,10 +22,16 @@ int main(int argc, char* argv[]) {
             snrValues.push_back(snr);
         }
 
-        LinkSimulation<BPSK> sim(config.numBits, config.noiseModel, config.seed);
-        auto berCurve = sim.sweepSNR(snrValues);
-        
-        writeCSV(config.outputFile, berCurve);
+        if (config.modulation == "BPSK") {
+            LinkSimulation<BPSK> sim(config.numBits, config.noiseModel, config.seed);
+            auto berCurve = sim.sweepSNR(snrValues);
+            writeCSV(config.outputFile, berCurve);
+            
+        } else if (config.modulation == "QPSK") {
+            LinkSimulation<QPSK> sim(config.numBits, config.noiseModel, config.seed);
+            auto berCurve = sim.sweepSNR(snrValues);
+            writeCSV(config.outputFile, berCurve);
+        }
 
     } catch (const std::invalid_argument& e) {
         std::cerr << "Invalid argument: " << e.what() << "\n";

@@ -1,4 +1,3 @@
-
 #include "BitGenerator.h"
 #include <vector>
 #include <random>

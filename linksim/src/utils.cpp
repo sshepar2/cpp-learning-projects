@@ -58,11 +58,13 @@ SimConfig parseConfig(const std::string& path) {
 
     if (config.numBits <= 0)
         throw std::invalid_argument("num_bits must be positive");
+    if (config.modulation == "QPSK" && config.numBits % 2 != 0)
+        throw std::invalid_argument("num_bits must be even for QPSK modulation");
     if (config.snrStep <= 0.0)
         throw std::invalid_argument("snr_range_db.step must be positive");
     if (config.snrMax < config.snrMin) 
         throw std::invalid_argument("snr_range_db.max must be greater than min");
-    if (config.modulation != "BPSK")
+    if (config.modulation != "BPSK" && config.modulation != "QPSK")
         throw std::invalid_argument("unsupported modulation: " + config.modulation);
     if (config.noiseModel != "AWGN")
         throw std::invalid_argument("unsupported noise model: " + config.noiseModel);

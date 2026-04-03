@@ -1,6 +1,6 @@
-# Link Simulation — BPSK Digital Communications
+# Link Simulation — BPSK/QPSK Digital Communications
 
-A C++ simulation of a digital communications link implementing BPSK (Binary Phase Shift Keying) modulation. Generates random bit sequences, modulates them to IQ symbols, transmits through a simulated AWGN channel, demodulates, and computes Bit Error Rate (BER) across a sweep of SNR values. Output is a BER vs SNR curve written to CSV, suitable for plotting and link budget analysis.
+A C++ simulation of a digital communications link implementing BPSK (Binary Phase Shift Keying) and QPSK (Quadrature Phase Shift Keying) modulation. Generates random bit sequences, modulates them to IQ symbols, transmits through a simulated AWGN channel, demodulates, and computes Bit Error Rate (BER) across a sweep of SNR values. Output is a BER vs SNR curve written to CSV, suitable for plotting and link budget analysis.
 
 ## Project Structure
 
@@ -12,11 +12,13 @@ linksim/
 │   ├── CMakeLists.txt              # defines executable
 │   ├── main.cpp                    # entry point, orchestrates pipeline
 │   ├── BPSK.cpp                    # BPSK encode/decode implementation
+│   ├── QPSK.cpp                    # QPSK encode/decode implementation
 │   ├── Channel.cpp                 # AWGN noise channel
 │   ├── BitGenerator.cpp            # reproducible random bit generation
 │   └── utils.cpp                   # config parsing, CSV output
 ├── include/
 │   ├── BPSK.h                      # BPSK modulation policy struct
+│   ├── QPSK.h                      # QPSK modulation policy struct
 │   ├── Channel.h                   # channel class declaration
 │   ├── BitGenerator.h              # bit generator class declaration
 │   ├── LinkSimulation.h            # templated simulation orchestrator
@@ -35,13 +37,14 @@ linksim/
 
 ### Digital Communications
 - BPSK modulation — bit 0 maps to {+1, 0}, bit 1 maps to {-1, 0} in the IQ plane
+- QPSK modulation — same mapping as BPSK where a second bit is stored on the Q axis
 - AWGN channel model — independent complex Gaussian noise on I and Q components
 - Noise standard deviation derived from SNR: `σ = sqrt(1 / (2 * 10^(SNR_dB/10)))`
 - Bit error rate computed as fraction of incorrectly decoded bits
 - BER vs SNR curve — the standard figure of merit for a digital communications link
 
 ### Object-Oriented and Template Design
-- Policy-based template design — `LinkSimulation<BPSK>` uses `BPSK` as a compile-time policy, enforcing a static interface contract (`encode`, `decode`, `BITS_PER_SYMBOL`)
+- Policy-based template design — `LinkSimulation<ModScheme>` uses `BPSK` or `QPSK` as a compile-time policy, enforcing a static interface contract (`encode`, `decode`, `BITS_PER_SYMBOL`)
 - `static constexpr` member for compile-time constant `BITS_PER_SYMBOL`
 - Clean separation of concerns — `BitGenerator`, `Channel`, and `LinkSimulation` each own a single responsibility
 - `Channel` constructed once and reused across SNR sweep, rather than reinstantiated per point
@@ -86,7 +89,7 @@ Edit `config.json` to control the simulation:
 
 | Field | Description |
 |---|---|
-| `modulation` | Modulation scheme. Currently `"BPSK"` only |
+| `modulation` | Modulation scheme. Currently `"BPSK"` or `"QPSK"` |
 | `num_bits` | Bits simulated per SNR point. Higher = more accurate BER at low error rates |
 | `snr_range_db` | SNR sweep range and step size in dB |
 | `noise_model` | Noise model. Currently `"AWGN"` only |
